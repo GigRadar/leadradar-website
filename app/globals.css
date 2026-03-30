@@ -454,12 +454,30 @@ footer {
 footer span { color:var(--accent); }
 
 @media (max-width:768px) {
-  nav { padding:14px 20px; }
+  /* NAV — hamburger-free: stack logo + links */
+  nav { padding:12px 16px; flex-wrap:wrap; gap:8px; }
+  .nav-logo { flex:1 1 auto; }
+  .nav-right { flex:1 1 100%; gap:10px; flex-wrap:wrap; justify-content:center; }
+  .nav-link { font-size:11px; }
+  .btn-cta { font-size:11px; padding:7px 14px; }
+  .theme-toggle { padding:4px 8px; font-size:10px; }
+
   .hero-text-section { padding:48px 20px 0; }
   .flow-section { display:none; }
   .feed-section, .how-section, .signals-section, .cta-section { padding-left:20px; padding-right:20px; }
   .how-grid { grid-template-columns:1fr; }
+
+  /* PRICING — single-column stack */
+  .pricing-section { padding:48px 16px 0; }
+  .pricing-wrap { grid-template-columns:1fr; }
+  .pc { padding:24px 18px; }
+  .pc-op { border-right:1px solid var(--green-border); }
+  .pc-con { border-left:1px solid var(--border); }
+  .pc-vs { flex-direction:row; padding:12px 0; border-top:none; border-bottom:none; }
+  .pc-vs-line { width:auto; height:1px; flex:1; background:var(--border); }
+
+  .cta-section { padding-left:16px; padding-right:16px; }
   .cta-input-row { flex-direction:column; }
   .cta-input { border-right:1px solid var(--border); }
-  footer { flex-direction:column; gap:8px; text-align:center; }
+  footer { flex-direction:column; gap:8px; text-align:center; padding:24px 16px; }
 }
