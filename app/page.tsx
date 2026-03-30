@@ -271,27 +271,36 @@ export default function Home() {
 
           {/* OPERATOR CARD */}
           <div className="pc pc-op">
-            <div className="pc-tag pc-tag-op">[ OPERATOR ]</div>
-            <div className="pc-headline">Contribute signals.<br />Get paid.</div>
-            <div className="pc-math">
-              <div className="pc-math-line">
-                <span className="pc-math-label">per validated signal</span>
-              </div>
-              <div className="pc-math-eq">
-                <span className="pc-num pc-num-op">$75.00</span>
-              </div>
-              <div className="pc-math-line pc-math-sep">× 1,000 signals</div>
-              <div className="pc-math-bar">══════════════════</div>
-              <div className="pc-math-eq">
-                <span className="pc-result-op">= $75,000.00</span>
-                <span className="pc-result-label"> earned</span>
-              </div>
+            <div className="pc-header">
+              <div className="pc-tag pc-tag-op">[ OPERATOR ]</div>
+              <div className="pc-headline">Contribute signals.<br />Get paid.</div>
+              <div className="pc-sub">Your data earns while you sleep. Higher quality → higher rate.</div>
             </div>
+
+            <div className="ptable">
+              <div className="ptable-head">
+                <span>quality tier</span>
+                <span>rate / signal</span>
+                <span>per 1,000</span>
+              </div>
+              {[
+                { tier: 'new contributor',  rate: '$0.50',  k: '$500',     hot: false },
+                { tier: 'validated signal', rate: '$5.00',  k: '$5,000',   hot: false },
+                { tier: 'high quality',     rate: '$25.00', k: '$25,000',  hot: false },
+                { tier: 'top tier ◄ you',   rate: '$75.00', k: '$75,000',  hot: true  },
+              ].map((r) => (
+                <div className={`ptable-row${r.hot ? ' ptable-row-hot' : ''}`} key={r.tier}>
+                  <span className="ptable-tier">{r.tier}</span>
+                  <span className="ptable-rate">{r.rate}</span>
+                  <span className="ptable-k">{r.k}</span>
+                </div>
+              ))}
+            </div>
+
             <div className="pc-perks">
-              <div className="pc-perk">◈ quality score multiplies your rate</div>
-              <div className="pc-perk">◈ validated signals only — no junk</div>
-              <div className="pc-perk">◈ any source: TG · Reddit · UW · custom</div>
               <div className="pc-perk">◈ reputation builds → higher payouts</div>
+              <div className="pc-perk">◈ any source: Telegram · Reddit · Upwork · custom</div>
+              <div className="pc-perk">◈ credits paid out per query from buyers</div>
             </div>
           </div>
 
@@ -304,42 +313,51 @@ export default function Home() {
 
           {/* CONSUMER CARD */}
           <div className="pc pc-con">
-            <div className="pc-tag pc-tag-con">[ CONSUMER ]</div>
-            <div className="pc-headline">Intent signals.<br />Dirt cheap.</div>
-
-            <div className="pc-tier">
-              <div className="pc-tier-label">☁  cloud · pay-as-you-go</div>
-              <div className="pc-free-chip">FREE · 1,000 signals / mo</div>
-              <div className="pc-math">
-                <div className="pc-math-line">
-                  <span className="pc-math-label">then from</span>
-                </div>
-                <div className="pc-math-eq">
-                  <span className="pc-num pc-num-con">$0.00000027</span>
-                </div>
-                <div className="pc-math-line pc-math-sep">× 1,000 signals</div>
-                <div className="pc-math-bar">══════════════════</div>
-                <div className="pc-math-eq">
-                  <span className="pc-result-con">= $0.27</span>
-                  <span className="pc-result-label"> total</span>
-                </div>
+            <div className="pc-header">
+              <div className="pc-tag pc-tag-con">[ CONSUMER ]</div>
+              <div className="pc-headline">Intent signals.<br />Dirt cheap.</div>
+              <div className="pc-payg-row">
+                <span className="pc-payg-chip">PAY-AS-YOU-GO</span>
+                <span className="pc-payg-chip">NO CONTRACTS</span>
+                <span className="pc-payg-chip">NO MINIMUMS</span>
               </div>
-              <div className="pc-quip">// yes. twenty-seven cents. per thousand leads.</div>
             </div>
 
-            <div className="pc-divider">· · · · · · · · · · · · · · · · · ·</div>
-
-            <div className="pc-tier">
-              <div className="pc-tier-label">⬡  self-hosted · open source</div>
-              <div className="pc-free-chip pc-free-forever">FREE FOREVER</div>
-              <div className="pc-oss-body">
-                Full source. Run on-prem. No usage fees.<br />
-                <span className="pc-oss-caveat">
-                  you'll need proxies · enrichment credits · captcha solvers ·
-                  scraping infra · ops time. LeadRadar cloud handles all of
-                  that so you don't have to.
-                </span>
+            <div className="pc-tier-label">☁  cloud</div>
+            <div className="ptable">
+              <div className="ptable-head">
+                <span>signals / mo</span>
+                <span>rate</span>
+                <span>monthly cost</span>
               </div>
+              {[
+                { vol: '1,000',      rate: 'FREE',          cost: '$0.00',   free: true,  hi: false },
+                { vol: '100,000',    rate: '$0.00000027',   cost: '$0.027',  free: false, hi: false },
+                { vol: '1,000,000',  rate: '$0.00000027',   cost: '$0.27',   free: false, hi: false },
+                { vol: '10,000,000', rate: '$0.00000027',   cost: '$2.70',   free: false, hi: true  },
+              ].map((r) => (
+                <div className={`ptable-row${r.free ? ' ptable-row-free' : ''}${r.hi ? ' ptable-row-hi' : ''}`} key={r.vol}>
+                  <span className="ptable-tier">{r.vol}</span>
+                  <span className="ptable-rate">{r.rate}</span>
+                  <span className="ptable-k">{r.cost}</span>
+                </div>
+              ))}
+            </div>
+            <div className="pc-quip">// ten million signals for the price of a coffee</div>
+
+            <div className="pc-divider">· · · · · · · · · · · · · · · · · · · · ·</div>
+
+            <div className="pc-tier-label">⬡  self-hosted · open source</div>
+            <div className="ptable">
+              <div className="ptable-row ptable-row-free">
+                <span className="ptable-tier">unlimited</span>
+                <span className="ptable-rate">FREE FOREVER</span>
+                <span className="ptable-k">$0.00</span>
+              </div>
+            </div>
+            <div className="pc-oss-caveat">
+              ⚠ you provide: proxies · enrichment credits · captcha solvers · scraping infra · ops.
+              LeadRadar cloud handles all of that.
             </div>
           </div>
 
