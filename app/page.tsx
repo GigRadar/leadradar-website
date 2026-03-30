@@ -58,7 +58,7 @@ export default function Home() {
     <>
       {/* NAV */}
       <nav>
-        <div className="nav-logo"><LeadRadarLogo height={28} /></div>
+        <div className="nav-logo"><LeadRadarLogo height={44} /></div>
         <div className="nav-right">
           <a href="#how" className="nav-link">how it works</a>
           <a href="#signals" className="nav-link">signals</a>
@@ -245,7 +245,7 @@ export default function Home() {
       {/* FOOTER */}
       <footer>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <LeadRadarLogo height={20} />
+          <LeadRadarLogo height={30} />
           <span>· v0.1 early access</span>
         </div>
         <div>built in public · open marketplace · crowd-sourced</div>
