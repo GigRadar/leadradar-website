@@ -284,18 +284,34 @@ nav {
 .feed-scroller { animation: scrollUp 36s linear infinite; }
 @keyframes scrollUp { 0%{transform:translateY(0)} 100%{transform:translateY(-50%)} }
 .feed-item {
-  padding: 9px 16px; border-bottom: 1px solid var(--border);
+  padding: 10px 16px; border-bottom: 1px solid var(--border);
   display: flex; align-items: flex-start; gap: 10px; font-size: 12px;
 }
-.feed-icon { flex-shrink:0; width:18px; text-align:center; }
-.feed-src { font-size:10px; flex-shrink:0; width:72px; letter-spacing:.05em; }
+.feed-avatar {
+  flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%;
+  object-fit: cover; border: 1px solid var(--border);
+}
+.feed-company-logo {
+  width: 14px; height: 14px; border-radius: 3px; object-fit: contain;
+  flex-shrink: 0; vertical-align: middle;
+}
+.feed-item-body { flex: 1; min-width: 0; }
+.feed-item-who {
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+  margin-bottom: 3px;
+}
+.feed-name { font-weight: 700; color: var(--fg); }
+.feed-role { color: var(--muted); }
+.feed-company { color: var(--accent); }
+.feed-dot-sep { color: var(--dim); }
+.feed-src { font-size: 10px; letter-spacing: .05em; margin-left: auto; }
 .feed-src.tg  { color:#5090ff; }
 .feed-src.uw  { color:#22c55e; }
 .feed-src.rd  { color:#ff6040; }
 .feed-src.li  { color:#7090cc; }
 .feed-src.dc  { color:#9080ff; }
-.feed-text { color:var(--fg); flex:1; line-height:1.5; }
-.feed-time { color:var(--dim); font-size:10px; flex-shrink:0; }
+.feed-time { color:var(--dim); font-size:10px; }
+.feed-text { color: var(--muted); line-height: 1.5; font-size: 11px; }
 
 /* HOW IT WORKS */
 .how-section { max-width:960px; margin:0 auto; padding:72px 48px 0; }

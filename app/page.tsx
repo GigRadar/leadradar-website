@@ -3,23 +3,47 @@
 import { useState, useEffect, useRef } from 'react'
 import LeadRadarLogo from './components/LeadRadarLogo'
 
-const SIGNALS = [
-  { icon: '🔥', srcClass: 'tg', srcLabel: '[Telegram]', text: '#saas-growth  "anyone using Clay alternatives? getting expensive fast"', time: '2s' },
-  { icon: '📡', srcClass: 'uw', srcLabel: '[Upwork]',   text: 'Job post: "Build LinkedIn scraper for outbound leads"  $3,200 budget', time: '5s' },
-  { icon: '⚡', srcClass: 'rd', srcLabel: '[Reddit]',   text: 'r/sales  "ZoomInfo renewed, feels like robbery — what are you using?"', time: '9s' },
-  { icon: '📊', srcClass: 'li', srcLabel: '[LinkedIn]', text: 'VP Sales @ Notion  liked 3 posts from Gong competitors', time: '13s' },
-  { icon: '🎯', srcClass: 'uw', srcLabel: '[Upwork]',   text: 'Job post: "Automate outreach for B2B SaaS startup"  $1,800 fixed price', time: '18s' },
-  { icon: '🔥', srcClass: 'tg', srcLabel: '[Telegram]', text: '#leadgen  "just hit 50 demos this month using intent signals only"', time: '22s' },
-  { icon: '🔴', srcClass: 'rd', srcLabel: '[Reddit]',   text: 'r/entrepreneur  "what signal told you a prospect was actually ready to buy?"', time: '27s' },
-  { icon: '📡', srcClass: 'dc', srcLabel: '[Discord]',  text: 'GTM Operators  "clay waterfall is broken again, anyone else?"', time: '31s' },
-  { icon: '⚡', srcClass: 'li', srcLabel: '[LinkedIn]', text: 'CTO @ Acme  switched from Salesforce to Attio · 3 posts about RevOps', time: '36s' },
-  { icon: '🎯', srcClass: 'uw', srcLabel: '[Upwork]',   text: 'Job post: "Scrape Crunchbase for Series A funding leads"  $900 budget', time: '40s' },
-  { icon: '🔥', srcClass: 'rd', srcLabel: '[Reddit]',   text: 'r/startups  "built a bot monitoring competitor G2 reviews for leads"', time: '44s' },
-  { icon: '📡', srcClass: 'uw', srcLabel: '[Upwork]',   text: 'Job post: "Lead enrichment pipeline with Apollo + Clay"  $2,100', time: '49s' },
-  { icon: '⚡', srcClass: 'li', srcLabel: '[LinkedIn]', text: "Head of Revenue @ Figma  RSVP'd to SaaStr Annual · following 4 sales tools", time: '54s' },
-  { icon: '🔴', srcClass: 'rd', srcLabel: '[Reddit]',   text: 'r/sales  "Apollo data quality dropped this quarter — alternatives?"', time: '58s' },
-  { icon: '🎯', srcClass: 'tg', srcLabel: '[Telegram]', text: '#saas-sales  "agency uses Instantly, client asking for intent signals to feed it"', time: '63s' },
+const PERSONAS = [
+  { avatar: 'https://i.pravatar.cc/40?img=47', name: 'Sarah Chen',      title: 'VP of Sales',       company: 'Stripe',     logo: 'https://logo.clearbit.com/stripe.com' },
+  { avatar: 'https://i.pravatar.cc/40?img=12', name: 'Marcus Johnson',  title: 'Head of Growth',    company: 'Figma',      logo: 'https://logo.clearbit.com/figma.com' },
+  { avatar: 'https://i.pravatar.cc/40?img=44', name: 'Emily Rodriguez', title: 'CRO',               company: 'Notion',     logo: 'https://logo.clearbit.com/notion.so' },
+  { avatar: 'https://i.pravatar.cc/40?img=15', name: 'Alex Kim',        title: 'VP Sales',          company: 'Linear',     logo: 'https://logo.clearbit.com/linear.app' },
+  { avatar: 'https://i.pravatar.cc/40?img=33', name: 'Jordan Taylor',   title: 'Head of Sales',     company: 'Vercel',     logo: 'https://logo.clearbit.com/vercel.com' },
+  { avatar: 'https://i.pravatar.cc/40?img=49', name: 'Nina Patel',      title: 'RevOps Lead',       company: 'Rippling',   logo: 'https://logo.clearbit.com/rippling.com' },
+  { avatar: 'https://i.pravatar.cc/40?img=18', name: 'Daniel Wu',       title: 'GTM Engineer',      company: 'Retool',     logo: 'https://logo.clearbit.com/retool.com' },
+  { avatar: 'https://i.pravatar.cc/40?img=56', name: 'Laura Martinez',  title: 'Dir of Revenue',    company: 'Loom',       logo: 'https://logo.clearbit.com/loom.com' },
+  { avatar: 'https://i.pravatar.cc/40?img=11', name: 'Ryan Brooks',     title: 'Sales Engineer',    company: 'Segment',    logo: 'https://logo.clearbit.com/segment.com' },
+  { avatar: 'https://i.pravatar.cc/40?img=52', name: 'Kayla Lee',       title: 'Head of Marketing', company: 'Intercom',   logo: 'https://logo.clearbit.com/intercom.com' },
+  { avatar: 'https://i.pravatar.cc/40?img=22', name: 'Tom Nguyen',      title: 'VP Growth',         company: 'Webflow',    logo: 'https://logo.clearbit.com/webflow.com' },
+  { avatar: 'https://i.pravatar.cc/40?img=60', name: 'Ava Singh',       title: 'CRO',               company: 'Attio',      logo: 'https://logo.clearbit.com/attio.com' },
+  { avatar: 'https://i.pravatar.cc/40?img=25', name: 'Chris Foster',    title: 'RevOps Manager',    company: 'Apollo',     logo: 'https://logo.clearbit.com/apollo.io' },
+  { avatar: 'https://i.pravatar.cc/40?img=64', name: 'Maya Rossi',      title: 'Head of Sales',     company: 'Clay',       logo: 'https://logo.clearbit.com/clay.com' },
+  { avatar: 'https://i.pravatar.cc/40?img=8',  name: 'Ben Harrison',    title: 'VP Revenue',        company: 'Instantly',  logo: 'https://logo.clearbit.com/instantly.ai' },
 ]
+
+const SIGNALS = [
+  { icon: '🔥', srcClass: 'tg', srcLabel: '[Telegram]', text: '#saas-growth  "anyone using Clay alternatives? getting expensive fast"', time: '2s',  persona: 0 },
+  { icon: '📡', srcClass: 'uw', srcLabel: '[Upwork]',   text: 'Job post: "Build LinkedIn scraper for outbound leads"  $3,200 budget',   time: '5s',  persona: 1 },
+  { icon: '⚡', srcClass: 'rd', srcLabel: '[Reddit]',   text: 'r/sales  "ZoomInfo renewed, feels like robbery — what are you using?"',   time: '9s',  persona: 2 },
+  { icon: '📊', srcClass: 'li', srcLabel: '[LinkedIn]', text: 'liked 3 posts from Gong competitors this week',                           time: '13s', persona: 3 },
+  { icon: '🎯', srcClass: 'uw', srcLabel: '[Upwork]',   text: 'Job post: "Automate outreach for B2B SaaS startup"  $1,800 fixed price',  time: '18s', persona: 4 },
+  { icon: '🔥', srcClass: 'tg', srcLabel: '[Telegram]', text: '#leadgen  "just hit 50 demos this month using intent signals only"',       time: '22s', persona: 5 },
+  { icon: '🔴', srcClass: 'rd', srcLabel: '[Reddit]',   text: 'r/entrepreneur  "what signal told you a prospect was actually ready?"',    time: '27s', persona: 6 },
+  { icon: '📡', srcClass: 'dc', srcLabel: '[Discord]',  text: 'GTM Operators  "clay waterfall is broken again, anyone else?"',            time: '31s', persona: 7 },
+  { icon: '⚡', srcClass: 'li', srcLabel: '[LinkedIn]', text: 'switched from Salesforce to Attio · 3 posts about RevOps stack',          time: '36s', persona: 8 },
+  { icon: '🎯', srcClass: 'uw', srcLabel: '[Upwork]',   text: 'Job post: "Scrape Crunchbase for Series A funding leads"  $900 budget',   time: '40s', persona: 9 },
+  { icon: '🔥', srcClass: 'rd', srcLabel: '[Reddit]',   text: 'r/startups  "built a bot monitoring competitor G2 reviews for leads"',    time: '44s', persona: 10 },
+  { icon: '📡', srcClass: 'uw', srcLabel: '[Upwork]',   text: 'Job post: "Lead enrichment pipeline with Apollo + Clay"  $2,100',         time: '49s', persona: 11 },
+  { icon: '⚡', srcClass: 'li', srcLabel: '[LinkedIn]', text: "RSVP'd to SaaStr Annual · following 4 sales intelligence tools",          time: '54s', persona: 12 },
+  { icon: '🔴', srcClass: 'rd', srcLabel: '[Reddit]',   text: 'r/sales  "Apollo data quality dropped this quarter — alternatives?"',     time: '58s', persona: 13 },
+  { icon: '🎯', srcClass: 'tg', srcLabel: '[Telegram]', text: '#saas-sales  "client asking for intent signals to feed into Instantly"',   time: '63s', persona: 14 },
+]
+
+function Avatar({ src, name }: { src: string; name: string }) {
+  return (
+    <img className="feed-avatar" src={src} alt={name} />
+  )
+}
 
 function SignalFeed() {
   const doubled = [...SIGNALS, ...SIGNALS]
@@ -31,14 +55,27 @@ function SignalFeed() {
       </div>
       <div className="feed-body">
         <div className="feed-scroller">
-          {doubled.map((s, i) => (
-            <div className="feed-item" key={i}>
-              <div className="feed-icon">{s.icon}</div>
-              <div className={`feed-src ${s.srcClass}`}>{s.srcLabel}</div>
-              <div className="feed-text">{s.text}</div>
-              <div className="feed-time">{s.time} ago</div>
-            </div>
-          ))}
+          {doubled.map((s, i) => {
+            const p = PERSONAS[s.persona]
+            return (
+              <div className="feed-item" key={i}>
+                <Avatar src={p.avatar} name={p.name} />
+                <div className="feed-item-body">
+                  <div className="feed-item-who">
+                    <span className="feed-name">{p.name}</span>
+                    <span className="feed-dot-sep">·</span>
+                    <span className="feed-role">{p.title}</span>
+                    <span className="feed-dot-sep">·</span>
+                    <img className="feed-company-logo" src={p.logo} alt={p.company} />
+                    <span className="feed-company">{p.company}</span>
+                    <div className={`feed-src ${s.srcClass}`}>{s.srcLabel}</div>
+                    <div className="feed-time">{s.time} ago</div>
+                  </div>
+                  <div className="feed-text">{s.icon} {s.text}</div>
+                </div>
+              </div>
+            )
+          })}
         </div>
       </div>
     </div>
