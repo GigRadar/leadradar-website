@@ -267,58 +267,77 @@ export default function Home() {
       {/* PRICING */}
       <section className="pricing-section" id="pricing">
         <div className="section-label">// pricing</div>
-        <div className="pricing-grid">
+        <div className="pricing-wrap">
 
-          {/* OPERATOR */}
-          <div className="pricing-card pricing-operator">
-            <div className="pricing-role">OPERATOR</div>
-            <div className="pricing-sub">contribute signals · earn credits</div>
-            <div className="pricing-divider">────────────────────────</div>
-            <div className="pricing-earn-label">earn up to</div>
-            <div className="pricing-big">$75.00<span className="pricing-unit"> / signal</span></div>
-            <div className="pricing-calc">
-              <span className="pricing-calc-op">1,000 signals</span>
-              <span className="pricing-calc-arrow"> ──► </span>
-              <span className="pricing-calc-result op-result">$75,000 earned</span>
+          {/* OPERATOR CARD */}
+          <div className="pc pc-op">
+            <div className="pc-tag pc-tag-op">[ OPERATOR ]</div>
+            <div className="pc-headline">Contribute signals.<br />Get paid.</div>
+            <div className="pc-math">
+              <div className="pc-math-line">
+                <span className="pc-math-label">per validated signal</span>
+              </div>
+              <div className="pc-math-eq">
+                <span className="pc-num pc-num-op">$75.00</span>
+              </div>
+              <div className="pc-math-line pc-math-sep">× 1,000 signals</div>
+              <div className="pc-math-bar">══════════════════</div>
+              <div className="pc-math-eq">
+                <span className="pc-result-op">= $75,000.00</span>
+                <span className="pc-result-label"> earned</span>
+              </div>
             </div>
-            <div className="pricing-divider">────────────────────────</div>
-            <div className="pricing-perks">
-              <div className="pricing-perk">◈ validated signals only</div>
-              <div className="pricing-perk">◈ quality score → higher rate</div>
-              <div className="pricing-perk">◈ reputation builds over time</div>
-              <div className="pricing-perk">◈ any source: TG · Reddit · UW · your own</div>
+            <div className="pc-perks">
+              <div className="pc-perk">◈ quality score multiplies your rate</div>
+              <div className="pc-perk">◈ validated signals only — no junk</div>
+              <div className="pc-perk">◈ any source: TG · Reddit · UW · custom</div>
+              <div className="pc-perk">◈ reputation builds → higher payouts</div>
             </div>
           </div>
 
-          {/* CONSUMER */}
-          <div className="pricing-card pricing-consumer">
-            <div className="pricing-role">CONSUMER</div>
-            <div className="pricing-sub">buy intent signals · pipe to your stack</div>
-            <div className="pricing-divider">────────────────────────</div>
+          {/* VS */}
+          <div className="pc-vs">
+            <div className="pc-vs-line" />
+            <div className="pc-vs-badge">VS</div>
+            <div className="pc-vs-line" />
+          </div>
 
-            <div className="pricing-tier">
-              <div className="pricing-tier-name">☁ CLOUD · PAY-AS-YOU-GO</div>
-              <div className="pricing-free-banner">FREE TIER · 1,000 signals / mo</div>
-              <div className="pricing-big">$0.00000027<span className="pricing-unit"> / signal</span></div>
-              <div className="pricing-calc">
-                <span className="pricing-calc-op">1,000 signals</span>
-                <span className="pricing-calc-arrow"> ──► </span>
-                <span className="pricing-calc-result con-result">$0.27</span>
+          {/* CONSUMER CARD */}
+          <div className="pc pc-con">
+            <div className="pc-tag pc-tag-con">[ CONSUMER ]</div>
+            <div className="pc-headline">Intent signals.<br />Dirt cheap.</div>
+
+            <div className="pc-tier">
+              <div className="pc-tier-label">☁  cloud · pay-as-you-go</div>
+              <div className="pc-free-chip">FREE · 1,000 signals / mo</div>
+              <div className="pc-math">
+                <div className="pc-math-line">
+                  <span className="pc-math-label">then from</span>
+                </div>
+                <div className="pc-math-eq">
+                  <span className="pc-num pc-num-con">$0.00000027</span>
+                </div>
+                <div className="pc-math-line pc-math-sep">× 1,000 signals</div>
+                <div className="pc-math-bar">══════════════════</div>
+                <div className="pc-math-eq">
+                  <span className="pc-result-con">= $0.27</span>
+                  <span className="pc-result-label"> total</span>
+                </div>
               </div>
-              <div className="pricing-note">yes, twenty-seven cents for a thousand leads</div>
+              <div className="pc-quip">// yes. twenty-seven cents. per thousand leads.</div>
             </div>
 
-            <div className="pricing-divider">────────────────────────</div>
+            <div className="pc-divider">· · · · · · · · · · · · · · · · · ·</div>
 
-            <div className="pricing-tier">
-              <div className="pricing-tier-name">⬡ SELF-HOSTED · OPEN SOURCE</div>
-              <div className="pricing-free-banner pricing-free-forever">FREE FOREVER</div>
-              <div className="pricing-oss-desc">
-                Run on your own infra. Full source available.<br />
-                <span className="pricing-caveat">
-                  ⚠ you'll need: enrichment credits · rotating proxies ·
-                  captcha solvers · scraping infra · maintenance — the stuff
-                  LeadRadar cloud handles for you.
+            <div className="pc-tier">
+              <div className="pc-tier-label">⬡  self-hosted · open source</div>
+              <div className="pc-free-chip pc-free-forever">FREE FOREVER</div>
+              <div className="pc-oss-body">
+                Full source. Run on-prem. No usage fees.<br />
+                <span className="pc-oss-caveat">
+                  you'll need proxies · enrichment credits · captcha solvers ·
+                  scraping infra · ops time. LeadRadar cloud handles all of
+                  that so you don't have to.
                 </span>
               </div>
             </div>
