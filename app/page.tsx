@@ -95,7 +95,7 @@ export default function Home() {
     <>
       {/* NAV */}
       <nav>
-        <div className="nav-logo"><LeadRadarLogo height={44} /></div>
+        <div className="nav-logo"><LeadRadarLogo height={28} /></div>
         <div className="nav-right">
           <a href="#how" className="nav-link">how it works</a>
           <a href="#signals" className="nav-link">signals</a>
