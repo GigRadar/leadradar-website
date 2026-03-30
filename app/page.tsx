@@ -134,14 +134,14 @@ export default function Home() {
           {/* LEFT: Signal Sources */}
           <div className="flow-col-left">
             {[
-              { icon: '📡', label: 'Telegram', sub: 'channels' },
-              { icon: '💼', label: 'Upwork',   sub: 'job posts' },
-              { icon: '🔴', label: 'Reddit',   sub: 'communities' },
-              { icon: '💬', label: 'Discord',  sub: 'servers' },
-              { icon: '🔗', label: 'LinkedIn', sub: 'dark social' },
+              { logo: 'telegram.org',  label: 'Telegram', sub: 'channels' },
+              { logo: 'upwork.com',    label: 'Upwork',   sub: 'job posts' },
+              { logo: 'reddit.com',    label: 'Reddit',   sub: 'communities' },
+              { logo: 'discord.com',   label: 'Discord',  sub: 'servers' },
+              { logo: 'linkedin.com',  label: 'LinkedIn', sub: 'dark social' },
             ].map((c) => (
               <div className="flow-card" key={c.label}>
-                <span className="flow-card-icon">{c.icon}</span>
+                <img className="flow-card-logo" src={`https://www.google.com/s2/favicons?domain=${c.logo}&sz=32`} alt={c.label} />
                 <span className="flow-card-label">{c.label}</span>
                 <span className="flow-card-sub">{c.sub}</span>
               </div>
@@ -187,14 +187,17 @@ export default function Home() {
           {/* RIGHT: GTM Stack */}
           <div className="flow-col-right">
             {[
-              { icon: '🔵', label: 'Clay',     sub: 'enrichment' },
-              { icon: '🔵', label: 'Apollo',   sub: 'enrichment' },
-              { icon: '📧', label: 'HeyReach', sub: 'sequencing' },
-              { icon: '⚡', label: 'Instantly', sub: 'sequencing' },
-              { icon: '＋', label: 'your stack', sub: 'via API', extra: 'add' },
+              { logo: 'clay.com',        label: 'Clay',      sub: 'enrichment' },
+              { logo: 'apollo.io',       label: 'Apollo',    sub: 'enrichment' },
+              { logo: 'heyreach.io',     label: 'HeyReach',  sub: 'sequencing' },
+              { logo: 'instantly.ai',    label: 'Instantly', sub: 'sequencing' },
+              { logo: null,              label: 'your stack', sub: 'via API', extra: 'add' },
             ].map((c) => (
               <div className={`flow-card${c.extra ? ' ' + c.extra : ''}`} key={c.label}>
-                <span className="flow-card-icon">{c.icon}</span>
+                {c.logo
+                  ? <img className="flow-card-logo" src={`https://www.google.com/s2/favicons?domain=${c.logo}&sz=32`} alt={c.label} />
+                  : <span className="flow-card-icon">＋</span>
+                }
                 <span className="flow-card-label">{c.label}</span>
                 <span className="flow-card-sub">{c.sub}</span>
               </div>
@@ -327,14 +330,15 @@ export default function Home() {
             <div className="ptable">
               <div className="ptable-head">
                 <span>signals / mo</span>
-                <span>rate</span>
+                <span>rate / signal</span>
                 <span>monthly cost</span>
               </div>
               {[
-                { vol: '1,000',      rate: 'FREE',          cost: '$0.00',   free: true,  hi: false },
-                { vol: '100,000',    rate: '$0.00000027',   cost: '$0.027',  free: false, hi: false },
-                { vol: '1,000,000',  rate: '$0.00000027',   cost: '$0.27',   free: false, hi: false },
-                { vol: '10,000,000', rate: '$0.00000027',   cost: '$2.70',   free: false, hi: true  },
+                { vol: '1,000',      rate: 'FREE',           cost: '$0.00',  free: true,  hi: false },
+                { vol: '10,000',     rate: '$0.0027',        cost: '$27.00', free: false, hi: false },
+                { vol: '100,000',    rate: '$0.00027',       cost: '$27.00', free: false, hi: false },
+                { vol: '1,000,000',  rate: '$0.000027',      cost: '$27.00', free: false, hi: false },
+                { vol: '10,000,000', rate: '$0.00000027',    cost: '$2.70',  free: false, hi: true  },
               ].map((r) => (
                 <div className={`ptable-row${r.free ? ' ptable-row-free' : ''}${r.hi ? ' ptable-row-hi' : ''}`} key={r.vol}>
                   <span className="ptable-tier">{r.vol}</span>
@@ -343,7 +347,7 @@ export default function Home() {
                 </div>
               ))}
             </div>
-            <div className="pc-quip">// ten million signals for the price of a coffee</div>
+            <div className="pc-quip">// price drops 10× every order of magnitude</div>
 
             <div className="pc-divider">· · · · · · · · · · · · · · · · · · · · ·</div>
 
