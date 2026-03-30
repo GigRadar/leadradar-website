@@ -280,48 +280,6 @@ export default function Home() {
         <div className="section-label">// pricing</div>
         <div className="pricing-wrap">
 
-          {/* OPERATOR CARD */}
-          <div className="pc pc-op">
-            <div className="pc-header">
-              <div className="pc-tag pc-tag-op">[ OPERATOR ]</div>
-              <div className="pc-headline">Contribute signals.<br />Get paid.</div>
-              <div className="pc-sub">Your data earns while you sleep. Higher quality → higher rate.</div>
-            </div>
-
-            <div className="ptable">
-              <div className="ptable-head">
-                <span>quality tier</span>
-                <span>rate / signal</span>
-                <span>per 1,000</span>
-              </div>
-              {[
-                { tier: 'new contributor',  rate: '$0.50',  k: '$500',     hot: false },
-                { tier: 'validated signal', rate: '$5.00',  k: '$5,000',   hot: false },
-                { tier: 'high quality',     rate: '$25.00', k: '$25,000',  hot: false },
-                { tier: 'top tier ◄ you',   rate: '$75.00', k: '$75,000',  hot: true  },
-              ].map((r) => (
-                <div className={`ptable-row${r.hot ? ' ptable-row-hot' : ''}`} key={r.tier}>
-                  <span className="ptable-tier">{r.tier}</span>
-                  <span className="ptable-rate">{r.rate}</span>
-                  <span className="ptable-k">{r.k}</span>
-                </div>
-              ))}
-            </div>
-
-            <div className="pc-perks">
-              <div className="pc-perk">◈ reputation builds → higher payouts</div>
-              <div className="pc-perk">◈ any source: Telegram · Reddit · Upwork · custom</div>
-              <div className="pc-perk">◈ credits paid out per query from buyers</div>
-            </div>
-          </div>
-
-          {/* VS */}
-          <div className="pc-vs">
-            <div className="pc-vs-line" />
-            <div className="pc-vs-badge">VS</div>
-            <div className="pc-vs-line" />
-          </div>
-
           {/* CONSUMER CARD */}
           <div className="pc pc-con">
             <div className="pc-header">
@@ -370,6 +328,48 @@ export default function Home() {
             <div className="pc-oss-caveat">
               ⚠ you provide: proxies · enrichment credits · captcha solvers · scraping infra · ops.
               LeadRadar cloud handles all of that.
+            </div>
+          </div>
+
+          {/* VS */}
+          <div className="pc-vs">
+            <div className="pc-vs-line" />
+            <div className="pc-vs-badge">VS</div>
+            <div className="pc-vs-line" />
+          </div>
+
+          {/* OPERATOR CARD */}
+          <div className="pc pc-op">
+            <div className="pc-header">
+              <div className="pc-tag pc-tag-op">[ OPERATOR ]</div>
+              <div className="pc-headline">Contribute signals.<br />Get paid.</div>
+              <div className="pc-sub">Your data earns while you sleep. Higher quality → higher rate.</div>
+            </div>
+
+            <div className="ptable">
+              <div className="ptable-head">
+                <span>quality tier</span>
+                <span>rate / signal</span>
+                <span>per 1,000</span>
+              </div>
+              {[
+                { tier: 'new contributor',  rate: '$0.50',  k: '$500',     hot: false },
+                { tier: 'validated signal', rate: '$5.00',  k: '$5,000',   hot: false },
+                { tier: 'high quality',     rate: '$25.00', k: '$25,000',  hot: false },
+                { tier: 'top tier ◄ you',   rate: '$75.00', k: '$75,000',  hot: true  },
+              ].map((r) => (
+                <div className={`ptable-row${r.hot ? ' ptable-row-hot' : ''}`} key={r.tier}>
+                  <span className="ptable-tier">{r.tier}</span>
+                  <span className="ptable-rate">{r.rate}</span>
+                  <span className="ptable-k">{r.k}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="pc-perks">
+              <div className="pc-perk">◈ reputation builds → higher payouts</div>
+              <div className="pc-perk">◈ any source: Telegram · Reddit · Upwork · custom</div>
+              <div className="pc-perk">◈ credits paid out per query from buyers</div>
             </div>
           </div>
 

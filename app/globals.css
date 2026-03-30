@@ -365,11 +365,11 @@ nav {
   display: flex; flex-direction: column; gap: 20px;
 }
 .pc-op {
-  border-right: none; border-color: var(--green-border);
+  border-left: none; border-color: var(--green-border);
   background: var(--card);
   background-image: linear-gradient(160deg, var(--green-dim) 0%, transparent 55%);
 }
-.pc-con { border-left: none; }
+.pc-con { border-right: none; }
 
 .pc-header { display: flex; flex-direction: column; gap: 8px; }
 .pc-tag {
@@ -510,8 +510,8 @@ footer span { color:var(--accent); }
   .pricing-section { padding:48px 16px 0; }
   .pricing-wrap { grid-template-columns:1fr; gap:0; }
   .pc { padding:28px 20px; }
-  .pc-op { border-right:1px solid var(--green-border); border-bottom:none; }
-  .pc-con { border-left:1px solid var(--border); border-top:none; }
+  .pc-con { border-right:1px solid var(--border); border-bottom:none; }
+  .pc-op { border-left:1px solid var(--green-border); border-top:none; }
   .pc-headline { font-size:18px; }
   .pc-vs {
     flex-direction:row; padding:16px 20px; gap:12px;
