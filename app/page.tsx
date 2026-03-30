@@ -99,7 +99,7 @@ export default function Home() {
         <div className="nav-right">
           <a href="#how" className="nav-link">how it works</a>
           <a href="#signals" className="nav-link">signals</a>
-          <a href="#waitlist" className="nav-link">pricing</a>
+          <a href="#pricing" className="nav-link">pricing</a>
           <button className="theme-toggle" onClick={toggleTheme}>[☀ / ☾]</button>
           <a href="#waitlist" className="btn-cta">join waitlist →</a>
         </div>
@@ -251,11 +251,12 @@ export default function Home() {
         <div className="section-label">// signal types</div>
         <div className="signals-grid">
           {[
-            { ascii: '[TG]──►[◎]', name: 'Telegram Intel',   ex: 'channel discussions, tool complaints, buying signals' },
+            { ascii: '[TG]──►[◎]', name: 'Telegram Intel',    ex: 'channel discussions, tool complaints, buying signals' },
             { ascii: '[UW]──►[◎]', name: 'Upwork Intent',    ex: 'job posts revealing tech stack & budget signals' },
             { ascii: '[RD]──►[◎]', name: 'Reddit Signals',   ex: 'product complaints, alternatives searches, intent threads' },
             { ascii: '[LI]──►[◎]', name: 'LinkedIn Activity', ex: 'competitor engagement, job changes, post signals' },
             { ascii: '[JB]──►[◎]', name: 'Job Board Intel',  ex: 'hiring patterns revealing tool adoption & budgets' },
+            { ascii: '[WB]──►[◎]', name: 'Website Visits',   ex: '51,663 contributing sites · visitor intent & ICP matching' },
             { ascii: '[??]──►[◎]', name: 'Your Connector',   ex: 'upload your own source, earn credits on every query' },
           ].map((s) => (
             <div className="signal-card" key={s.name}>
