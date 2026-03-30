@@ -4,6 +4,7 @@ import './globals.css'
 export const metadata: Metadata = {
   title: 'LeadRadar — The GTM Signal Marketplace',
   description: 'Crowd-sourced intent signals from Telegram, Upwork, Reddit and 50+ sources. Pipe directly into Clay, Apollo, HeyReach, Instantly.',
+  icons: { icon: '/favicon.svg' },
   openGraph: {
     title: 'LeadRadar — The GTM Signal Marketplace',
     description: 'The signal layer your GTM stack is missing.',
