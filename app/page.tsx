@@ -4,21 +4,21 @@ import { useState, useEffect, useRef } from 'react'
 import LeadRadarLogo from './components/LeadRadarLogo'
 
 const PERSONAS = [
-  { avatar: 'https://i.pravatar.cc/40?img=47', name: 'Sarah Chen',      title: 'VP of Sales',       company: 'Stripe',     logo: 'https://logo.clearbit.com/stripe.com' },
-  { avatar: 'https://i.pravatar.cc/40?img=12', name: 'Marcus Johnson',  title: 'Head of Growth',    company: 'Figma',      logo: 'https://logo.clearbit.com/figma.com' },
-  { avatar: 'https://i.pravatar.cc/40?img=44', name: 'Emily Rodriguez', title: 'CRO',               company: 'Notion',     logo: 'https://logo.clearbit.com/notion.so' },
-  { avatar: 'https://i.pravatar.cc/40?img=15', name: 'Alex Kim',        title: 'VP Sales',          company: 'Linear',     logo: 'https://logo.clearbit.com/linear.app' },
-  { avatar: 'https://i.pravatar.cc/40?img=33', name: 'Jordan Taylor',   title: 'Head of Sales',     company: 'Vercel',     logo: 'https://logo.clearbit.com/vercel.com' },
-  { avatar: 'https://i.pravatar.cc/40?img=49', name: 'Nina Patel',      title: 'RevOps Lead',       company: 'Rippling',   logo: 'https://logo.clearbit.com/rippling.com' },
-  { avatar: 'https://i.pravatar.cc/40?img=18', name: 'Daniel Wu',       title: 'GTM Engineer',      company: 'Retool',     logo: 'https://logo.clearbit.com/retool.com' },
-  { avatar: 'https://i.pravatar.cc/40?img=56', name: 'Laura Martinez',  title: 'Dir of Revenue',    company: 'Loom',       logo: 'https://logo.clearbit.com/loom.com' },
-  { avatar: 'https://i.pravatar.cc/40?img=11', name: 'Ryan Brooks',     title: 'Sales Engineer',    company: 'Segment',    logo: 'https://logo.clearbit.com/segment.com' },
-  { avatar: 'https://i.pravatar.cc/40?img=52', name: 'Kayla Lee',       title: 'Head of Marketing', company: 'Intercom',   logo: 'https://logo.clearbit.com/intercom.com' },
-  { avatar: 'https://i.pravatar.cc/40?img=22', name: 'Tom Nguyen',      title: 'VP Growth',         company: 'Webflow',    logo: 'https://logo.clearbit.com/webflow.com' },
-  { avatar: 'https://i.pravatar.cc/40?img=60', name: 'Ava Singh',       title: 'CRO',               company: 'Attio',      logo: 'https://logo.clearbit.com/attio.com' },
-  { avatar: 'https://i.pravatar.cc/40?img=25', name: 'Chris Foster',    title: 'RevOps Manager',    company: 'Apollo',     logo: 'https://logo.clearbit.com/apollo.io' },
-  { avatar: 'https://i.pravatar.cc/40?img=64', name: 'Maya Rossi',      title: 'Head of Sales',     company: 'Clay',       logo: 'https://logo.clearbit.com/clay.com' },
-  { avatar: 'https://i.pravatar.cc/40?img=8',  name: 'Ben Harrison',    title: 'VP Revenue',        company: 'Instantly',  logo: 'https://logo.clearbit.com/instantly.ai' },
+  { avatar: 'https://i.pravatar.cc/40?img=47', name: 'Sarah Chen',      title: 'VP of Sales',       company: 'Stripe',     logo: 'https://www.google.com/s2/favicons?domain=stripe.com&sz=32' },
+  { avatar: 'https://i.pravatar.cc/40?img=12', name: 'Marcus Johnson',  title: 'Head of Growth',    company: 'Figma',      logo: 'https://www.google.com/s2/favicons?domain=figma.com&sz=32' },
+  { avatar: 'https://i.pravatar.cc/40?img=44', name: 'Emily Rodriguez', title: 'CRO',               company: 'Notion',     logo: 'https://www.google.com/s2/favicons?domain=notion.so&sz=32' },
+  { avatar: 'https://i.pravatar.cc/40?img=15', name: 'Alex Kim',        title: 'VP Sales',          company: 'Linear',     logo: 'https://www.google.com/s2/favicons?domain=linear.app&sz=32' },
+  { avatar: 'https://i.pravatar.cc/40?img=33', name: 'Jordan Taylor',   title: 'Head of Sales',     company: 'Vercel',     logo: 'https://www.google.com/s2/favicons?domain=vercel.com&sz=32' },
+  { avatar: 'https://i.pravatar.cc/40?img=49', name: 'Nina Patel',      title: 'RevOps Lead',       company: 'Rippling',   logo: 'https://www.google.com/s2/favicons?domain=rippling.com&sz=32' },
+  { avatar: 'https://i.pravatar.cc/40?img=18', name: 'Daniel Wu',       title: 'GTM Engineer',      company: 'Retool',     logo: 'https://www.google.com/s2/favicons?domain=retool.com&sz=32' },
+  { avatar: 'https://i.pravatar.cc/40?img=56', name: 'Laura Martinez',  title: 'Dir of Revenue',    company: 'Loom',       logo: 'https://www.google.com/s2/favicons?domain=loom.com&sz=32' },
+  { avatar: 'https://i.pravatar.cc/40?img=11', name: 'Ryan Brooks',     title: 'Sales Engineer',    company: 'Segment',    logo: 'https://www.google.com/s2/favicons?domain=segment.com&sz=32' },
+  { avatar: 'https://i.pravatar.cc/40?img=52', name: 'Kayla Lee',       title: 'Head of Marketing', company: 'Intercom',   logo: 'https://www.google.com/s2/favicons?domain=intercom.com&sz=32' },
+  { avatar: 'https://i.pravatar.cc/40?img=22', name: 'Tom Nguyen',      title: 'VP Growth',         company: 'Webflow',    logo: 'https://www.google.com/s2/favicons?domain=webflow.com&sz=32' },
+  { avatar: 'https://i.pravatar.cc/40?img=60', name: 'Ava Singh',       title: 'CRO',               company: 'Attio',      logo: 'https://www.google.com/s2/favicons?domain=attio.com&sz=32' },
+  { avatar: 'https://i.pravatar.cc/40?img=25', name: 'Chris Foster',    title: 'RevOps Manager',    company: 'Apollo',     logo: 'https://www.google.com/s2/favicons?domain=apollo.io&sz=32' },
+  { avatar: 'https://i.pravatar.cc/40?img=64', name: 'Maya Rossi',      title: 'Head of Sales',     company: 'Clay',       logo: 'https://www.google.com/s2/favicons?domain=clay.com&sz=32' },
+  { avatar: 'https://i.pravatar.cc/40?img=8',  name: 'Ben Harrison',    title: 'VP Revenue',        company: 'Instantly',  logo: 'https://www.google.com/s2/favicons?domain=instantly.ai&sz=32' },
 ]
 
 const SIGNALS = [

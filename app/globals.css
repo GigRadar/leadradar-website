@@ -292,8 +292,8 @@ nav {
   object-fit: cover; border: 1px solid var(--border);
 }
 .feed-company-logo {
-  width: 14px; height: 14px; border-radius: 3px; object-fit: contain;
-  flex-shrink: 0; vertical-align: middle;
+  width: 16px; height: 16px; border-radius: 3px; object-fit: contain;
+  flex-shrink: 0; vertical-align: middle; image-rendering: -webkit-optimize-contrast;
 }
 .feed-item-body { flex: 1; min-width: 0; }
 .feed-item-who {
