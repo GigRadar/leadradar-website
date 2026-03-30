@@ -84,6 +84,7 @@ function SignalFeed() {
 
 export default function Home() {
   const [theme, setTheme] = useState<'dark' | 'light'>('dark')
+  const [menuOpen, setMenuOpen] = useState(false)
 
   const toggleTheme = () => {
     const next = theme === 'dark' ? 'light' : 'dark'
@@ -96,14 +97,20 @@ export default function Home() {
       {/* NAV */}
       <nav>
         <div className="nav-logo"><LeadRadarLogo height={28} /></div>
-        <div className="nav-right">
-          <a href="#how" className="nav-link">how it works</a>
-          <a href="#signals" className="nav-link">signals</a>
-          <a href="#pricing" className="nav-link">pricing</a>
+        <button className="nav-hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
+          <span className={`hamburger-line${menuOpen ? ' open' : ''}`} />
+          <span className={`hamburger-line${menuOpen ? ' open' : ''}`} />
+          <span className={`hamburger-line${menuOpen ? ' open' : ''}`} />
+        </button>
+        <div className={`nav-right${menuOpen ? ' nav-open' : ''}`}>
+          <a href="#how" className="nav-link" onClick={() => setMenuOpen(false)}>how it works</a>
+          <a href="#signals" className="nav-link" onClick={() => setMenuOpen(false)}>signals</a>
+          <a href="#pricing" className="nav-link" onClick={() => setMenuOpen(false)}>pricing</a>
           <button className="theme-toggle" onClick={toggleTheme}>[☀ / ☾]</button>
-          <a href="#waitlist" className="btn-cta">join waitlist →</a>
+          <a href="#waitlist" className="btn-cta" onClick={() => setMenuOpen(false)}>join waitlist →</a>
         </div>
       </nav>
+      {menuOpen && <div className="nav-overlay" onClick={() => setMenuOpen(false)} />}
 
       {/* HERO TEXT */}
       <section className="hero-text-section">
