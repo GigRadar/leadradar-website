@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import LeadRadarLogo from './components/LeadRadarLogo'
 
 const SIGNALS = [
   { icon: '🔥', srcClass: 'tg', srcLabel: '[Telegram]', text: '#saas-growth  "anyone using Clay alternatives? getting expensive fast"', time: '2s' },
@@ -57,7 +58,7 @@ export default function Home() {
     <>
       {/* NAV */}
       <nav>
-        <div className="nav-logo">LEAD<span>RADAR</span></div>
+        <div className="nav-logo"><LeadRadarLogo height={28} /></div>
         <div className="nav-right">
           <a href="#how" className="nav-link">how it works</a>
           <a href="#signals" className="nav-link">signals</a>
@@ -243,7 +244,10 @@ export default function Home() {
 
       {/* FOOTER */}
       <footer>
-        <div>LEAD<span>RADAR</span> · v0.1 early access</div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <LeadRadarLogo height={20} />
+          <span>· v0.1 early access</span>
+        </div>
         <div>built in public · open marketplace · crowd-sourced</div>
       </footer>
     </>
