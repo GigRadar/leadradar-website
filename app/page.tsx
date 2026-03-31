@@ -300,11 +300,11 @@ export default function Home() {
                 <span>monthly cost</span>
               </div>
               {[
-                { vol: '1,000',      rate: 'FREE',           cost: '$0.00',  free: true,  hi: false },
-                { vol: '10,000',     rate: '$0.0027',        cost: '$27.00', free: false, hi: false },
-                { vol: '100,000',    rate: '$0.00027',       cost: '$27.00', free: false, hi: false },
-                { vol: '1,000,000',  rate: '$0.000027',      cost: '$27.00', free: false, hi: false },
-                { vol: '10,000,000', rate: '$0.00000027',    cost: '$2.70',  free: false, hi: true  },
+                { vol: '1,000',      rate: 'FREE',        cost: '$0.00',      free: true,  hi: false },
+                { vol: '10,000',     rate: '$0.0027',     cost: '$27.00',     free: false, hi: false },
+                { vol: '100,000',    rate: '$0.00243',    cost: '$243.00',    free: false, hi: false },
+                { vol: '1,000,000',  rate: '$0.002187',   cost: '$2,187.00',  free: false, hi: false },
+                { vol: '10,000,000', rate: '$0.001968',   cost: '$19,683.00', free: false, hi: true  },
               ].map((r) => (
                 <div className={`ptable-row${r.free ? ' ptable-row-free' : ''}${r.hi ? ' ptable-row-hi' : ''}`} key={r.vol}>
                   <span className="ptable-tier">{r.vol}</span>
@@ -313,7 +313,7 @@ export default function Home() {
                 </div>
               ))}
             </div>
-            <div className="pc-quip">// price drops 10× every order of magnitude</div>
+            <div className="pc-quip">// 10% rate discount at every volume tier</div>
 
             <div className="pc-divider">· · · · · · · · · · · · · · · · · · · · ·</div>
 
