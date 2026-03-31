@@ -84,6 +84,7 @@ function SignalFeed() {
 
 export default function Home() {
   const [theme, setTheme] = useState<'dark' | 'light'>('dark')
+  const [menuOpen, setMenuOpen] = useState(false)
 
   const toggleTheme = () => {
     const next = theme === 'dark' ? 'light' : 'dark'
@@ -96,14 +97,20 @@ export default function Home() {
       {/* NAV */}
       <nav>
         <div className="nav-logo"><LeadRadarLogo height={28} /></div>
-        <div className="nav-right">
-          <a href="#how" className="nav-link">how it works</a>
-          <a href="#signals" className="nav-link">signals</a>
-          <a href="#pricing" className="nav-link">pricing</a>
+        <button className="nav-hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
+          <span className={`hamburger-line${menuOpen ? ' open' : ''}`} />
+          <span className={`hamburger-line${menuOpen ? ' open' : ''}`} />
+          <span className={`hamburger-line${menuOpen ? ' open' : ''}`} />
+        </button>
+        <div className={`nav-right${menuOpen ? ' nav-open' : ''}`}>
+          <a href="#how" className="nav-link" onClick={() => setMenuOpen(false)}>how it works</a>
+          <a href="#signals" className="nav-link" onClick={() => setMenuOpen(false)}>signals</a>
+          <a href="#pricing" className="nav-link" onClick={() => setMenuOpen(false)}>pricing</a>
           <button className="theme-toggle" onClick={toggleTheme}>[☀ / ☾]</button>
-          <a href="#waitlist" className="btn-cta">join waitlist →</a>
+          <a href="#waitlist" className="btn-cta" onClick={() => setMenuOpen(false)}>join waitlist →</a>
         </div>
       </nav>
+      {menuOpen && <div className="nav-overlay" onClick={() => setMenuOpen(false)} />}
 
       {/* HERO TEXT */}
       <section className="hero-text-section">
@@ -273,6 +280,64 @@ export default function Home() {
         <div className="section-label">// pricing</div>
         <div className="pricing-wrap">
 
+          {/* CONSUMER CARD */}
+          <div className="pc pc-con">
+            <div className="pc-header">
+              <div className="pc-tag pc-tag-con">[ CONSUMER ]</div>
+              <div className="pc-headline">Intent signals.<br />Dirt cheap.</div>
+              <div className="pc-payg-row">
+                <span className="pc-payg-chip">PAY-AS-YOU-GO</span>
+                <span className="pc-payg-chip">NO CONTRACTS</span>
+                <span className="pc-payg-chip">NO MINIMUMS</span>
+              </div>
+            </div>
+
+            <div className="pc-tier-label">☁  cloud</div>
+            <div className="ptable">
+              <div className="ptable-head">
+                <span>signals / mo</span>
+                <span>rate / signal</span>
+                <span>monthly cost</span>
+              </div>
+              {[
+                { vol: '1,000',      rate: 'FREE',        cost: '$0.00',      free: true,  hi: false },
+                { vol: '10,000',     rate: '$0.0027',     cost: '$27.00',     free: false, hi: false },
+                { vol: '100,000',    rate: '$0.00243',    cost: '$243.00',    free: false, hi: false },
+                { vol: '1,000,000',  rate: '$0.002187',   cost: '$2,187.00',  free: false, hi: false },
+                { vol: '10,000,000', rate: '$0.001968',   cost: '$19,683.00', free: false, hi: true  },
+              ].map((r) => (
+                <div className={`ptable-row${r.free ? ' ptable-row-free' : ''}${r.hi ? ' ptable-row-hi' : ''}`} key={r.vol}>
+                  <span className="ptable-tier">{r.vol}</span>
+                  <span className="ptable-rate">{r.rate}</span>
+                  <span className="ptable-k">{r.cost}</span>
+                </div>
+              ))}
+            </div>
+            <div className="pc-quip">// 10% rate discount at every volume tier</div>
+
+            <div className="pc-divider">· · · · · · · · · · · · · · · · · · · · ·</div>
+
+            <div className="pc-tier-label">⬡  self-hosted · open source</div>
+            <div className="ptable">
+              <div className="ptable-row ptable-row-free">
+                <span className="ptable-tier">unlimited</span>
+                <span className="ptable-rate">FREE FOREVER</span>
+                <span className="ptable-k">$0.00</span>
+              </div>
+            </div>
+            <div className="pc-oss-caveat">
+              ⚠ you provide: proxies · enrichment credits · captcha solvers · scraping infra · ops.
+              LeadRadar cloud handles all of that.
+            </div>
+          </div>
+
+          {/* VS */}
+          <div className="pc-vs">
+            <div className="pc-vs-line" />
+            <div className="pc-vs-badge">VS</div>
+            <div className="pc-vs-line" />
+          </div>
+
           {/* OPERATOR CARD */}
           <div className="pc pc-op">
             <div className="pc-header">
@@ -305,64 +370,6 @@ export default function Home() {
               <div className="pc-perk">◈ reputation builds → higher payouts</div>
               <div className="pc-perk">◈ any source: Telegram · Reddit · Upwork · custom</div>
               <div className="pc-perk">◈ credits paid out per query from buyers</div>
-            </div>
-          </div>
-
-          {/* VS */}
-          <div className="pc-vs">
-            <div className="pc-vs-line" />
-            <div className="pc-vs-badge">VS</div>
-            <div className="pc-vs-line" />
-          </div>
-
-          {/* CONSUMER CARD */}
-          <div className="pc pc-con">
-            <div className="pc-header">
-              <div className="pc-tag pc-tag-con">[ CONSUMER ]</div>
-              <div className="pc-headline">Intent signals.<br />Dirt cheap.</div>
-              <div className="pc-payg-row">
-                <span className="pc-payg-chip">PAY-AS-YOU-GO</span>
-                <span className="pc-payg-chip">NO CONTRACTS</span>
-                <span className="pc-payg-chip">NO MINIMUMS</span>
-              </div>
-            </div>
-
-            <div className="pc-tier-label">☁  cloud</div>
-            <div className="ptable">
-              <div className="ptable-head">
-                <span>signals / mo</span>
-                <span>rate / signal</span>
-                <span>monthly cost</span>
-              </div>
-              {[
-                { vol: '1,000',      rate: 'FREE',           cost: '$0.00',  free: true,  hi: false },
-                { vol: '10,000',     rate: '$0.0027',        cost: '$27.00', free: false, hi: false },
-                { vol: '100,000',    rate: '$0.00027',       cost: '$27.00', free: false, hi: false },
-                { vol: '1,000,000',  rate: '$0.000027',      cost: '$27.00', free: false, hi: false },
-                { vol: '10,000,000', rate: '$0.00000027',    cost: '$2.70',  free: false, hi: true  },
-              ].map((r) => (
-                <div className={`ptable-row${r.free ? ' ptable-row-free' : ''}${r.hi ? ' ptable-row-hi' : ''}`} key={r.vol}>
-                  <span className="ptable-tier">{r.vol}</span>
-                  <span className="ptable-rate">{r.rate}</span>
-                  <span className="ptable-k">{r.cost}</span>
-                </div>
-              ))}
-            </div>
-            <div className="pc-quip">// price drops 10× every order of magnitude</div>
-
-            <div className="pc-divider">· · · · · · · · · · · · · · · · · · · · ·</div>
-
-            <div className="pc-tier-label">⬡  self-hosted · open source</div>
-            <div className="ptable">
-              <div className="ptable-row ptable-row-free">
-                <span className="ptable-tier">unlimited</span>
-                <span className="ptable-rate">FREE FOREVER</span>
-                <span className="ptable-k">$0.00</span>
-              </div>
-            </div>
-            <div className="pc-oss-caveat">
-              ⚠ you provide: proxies · enrichment credits · captcha solvers · scraping infra · ops.
-              LeadRadar cloud handles all of that.
             </div>
           </div>
 
