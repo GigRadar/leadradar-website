@@ -21,22 +21,30 @@ const PERSONAS = [
   { avatar: 'https://i.pravatar.cc/40?img=8',  name: 'Ben Harrison',    title: 'VP Revenue',        company: 'Instantly',  logo: 'https://www.google.com/s2/favicons?domain=instantly.ai&sz=32' },
 ]
 
+const SRC_ICONS: Record<string, string> = {
+  tg: 'https://www.google.com/s2/favicons?domain=telegram.org&sz=32',
+  uw: 'https://www.google.com/s2/favicons?domain=upwork.com&sz=32',
+  rd: 'https://www.google.com/s2/favicons?domain=reddit.com&sz=32',
+  li: 'https://www.google.com/s2/favicons?domain=linkedin.com&sz=32',
+  dc: 'https://www.google.com/s2/favicons?domain=discord.com&sz=32',
+}
+
 const SIGNALS = [
-  { icon: '🔥', srcClass: 'tg', srcLabel: '[Telegram]', text: '#saas-growth  "anyone using Clay alternatives? getting expensive fast"', time: '2s',  persona: 0 },
-  { icon: '📡', srcClass: 'uw', srcLabel: '[Upwork]',   text: 'Job post: "Build LinkedIn scraper for outbound leads"  $3,200 budget',   time: '5s',  persona: 1 },
-  { icon: '⚡', srcClass: 'rd', srcLabel: '[Reddit]',   text: 'r/sales  "ZoomInfo renewed, feels like robbery — what are you using?"',   time: '9s',  persona: 2 },
-  { icon: '📊', srcClass: 'li', srcLabel: '[LinkedIn]', text: 'liked 3 posts from Gong competitors this week',                           time: '13s', persona: 3 },
-  { icon: '🎯', srcClass: 'uw', srcLabel: '[Upwork]',   text: 'Job post: "Automate outreach for B2B SaaS startup"  $1,800 fixed price',  time: '18s', persona: 4 },
-  { icon: '🔥', srcClass: 'tg', srcLabel: '[Telegram]', text: '#leadgen  "just hit 50 demos this month using intent signals only"',       time: '22s', persona: 5 },
-  { icon: '🔴', srcClass: 'rd', srcLabel: '[Reddit]',   text: 'r/entrepreneur  "what signal told you a prospect was actually ready?"',    time: '27s', persona: 6 },
-  { icon: '📡', srcClass: 'dc', srcLabel: '[Discord]',  text: 'GTM Operators  "clay waterfall is broken again, anyone else?"',            time: '31s', persona: 7 },
-  { icon: '⚡', srcClass: 'li', srcLabel: '[LinkedIn]', text: 'switched from Salesforce to Attio · 3 posts about RevOps stack',          time: '36s', persona: 8 },
-  { icon: '🎯', srcClass: 'uw', srcLabel: '[Upwork]',   text: 'Job post: "Scrape Crunchbase for Series A funding leads"  $900 budget',   time: '40s', persona: 9 },
-  { icon: '🔥', srcClass: 'rd', srcLabel: '[Reddit]',   text: 'r/startups  "built a bot monitoring competitor G2 reviews for leads"',    time: '44s', persona: 10 },
-  { icon: '📡', srcClass: 'uw', srcLabel: '[Upwork]',   text: 'Job post: "Lead enrichment pipeline with Apollo + Clay"  $2,100',         time: '49s', persona: 11 },
-  { icon: '⚡', srcClass: 'li', srcLabel: '[LinkedIn]', text: "RSVP'd to SaaStr Annual · following 4 sales intelligence tools",          time: '54s', persona: 12 },
-  { icon: '🔴', srcClass: 'rd', srcLabel: '[Reddit]',   text: 'r/sales  "Apollo data quality dropped this quarter — alternatives?"',     time: '58s', persona: 13 },
-  { icon: '🎯', srcClass: 'tg', srcLabel: '[Telegram]', text: '#saas-sales  "client asking for intent signals to feed into Instantly"',   time: '63s', persona: 14 },
+  { icon: '🔥', srcClass: 'tg', text: '#saas-growth  "anyone using Clay alternatives? getting expensive fast"', time: '2s',  persona: 0 },
+  { icon: '📡', srcClass: 'uw', text: 'Job post: "Build LinkedIn scraper for outbound leads"  $3,200 budget',   time: '5s',  persona: 1 },
+  { icon: '⚡', srcClass: 'rd', text: 'r/sales  "ZoomInfo renewed, feels like robbery — what are you using?"',   time: '9s',  persona: 2 },
+  { icon: '📊', srcClass: 'li', text: 'liked 3 posts from Gong competitors this week',                           time: '13s', persona: 3 },
+  { icon: '🎯', srcClass: 'uw', text: 'Job post: "Automate outreach for B2B SaaS startup"  $1,800 fixed price',  time: '18s', persona: 4 },
+  { icon: '🔥', srcClass: 'tg', text: '#leadgen  "just hit 50 demos this month using intent signals only"',       time: '22s', persona: 5 },
+  { icon: '🔴', srcClass: 'rd', text: 'r/entrepreneur  "what signal told you a prospect was actually ready?"',    time: '27s', persona: 6 },
+  { icon: '📡', srcClass: 'dc', text: 'GTM Operators  "clay waterfall is broken again, anyone else?"',            time: '31s', persona: 7 },
+  { icon: '⚡', srcClass: 'li', text: 'switched from Salesforce to Attio · 3 posts about RevOps stack',          time: '36s', persona: 8 },
+  { icon: '🎯', srcClass: 'uw', text: 'Job post: "Scrape Crunchbase for Series A funding leads"  $900 budget',   time: '40s', persona: 9 },
+  { icon: '🔥', srcClass: 'rd', text: 'r/startups  "built a bot monitoring competitor G2 reviews for leads"',    time: '44s', persona: 10 },
+  { icon: '📡', srcClass: 'uw', text: 'Job post: "Lead enrichment pipeline with Apollo + Clay"  $2,100',         time: '49s', persona: 11 },
+  { icon: '⚡', srcClass: 'li', text: "RSVP'd to SaaStr Annual · following 4 sales intelligence tools",          time: '54s', persona: 12 },
+  { icon: '🔴', srcClass: 'rd', text: 'r/sales  "Apollo data quality dropped this quarter — alternatives?"',     time: '58s', persona: 13 },
+  { icon: '🎯', srcClass: 'tg', text: '#saas-sales  "client asking for intent signals to feed into Instantly"',   time: '63s', persona: 14 },
 ]
 
 function Avatar({ src, name }: { src: string; name: string }) {
@@ -68,10 +76,12 @@ function SignalFeed() {
                     <span className="feed-dot-sep">·</span>
                     <img className="feed-company-logo" src={p.logo} alt={p.company} />
                     <span className="feed-company">{p.company}</span>
-                    <div className={`feed-src ${s.srcClass}`}>{s.srcLabel}</div>
                     <div className="feed-time">{s.time} ago</div>
                   </div>
-                  <div className="feed-text">{s.icon} {s.text}</div>
+                  <div className="feed-text">
+                    <img className="feed-src-icon" src={SRC_ICONS[s.srcClass]} alt={s.srcClass} />
+                    {s.icon} {s.text}
+                  </div>
                 </div>
               </div>
             )

@@ -324,14 +324,12 @@ nav {
 .feed-role { color: var(--muted); }
 .feed-company { color: var(--accent); }
 .feed-dot-sep { color: var(--dim); }
-.feed-src { font-size: 10px; letter-spacing: .05em; margin-left: auto; }
-.feed-src.tg  { color:#5090ff; }
-.feed-src.uw  { color:#22c55e; }
-.feed-src.rd  { color:#ff6040; }
-.feed-src.li  { color:#7090cc; }
-.feed-src.dc  { color:#9080ff; }
-.feed-time { color:var(--dim); font-size:10px; }
-.feed-text { color: var(--muted); line-height: 1.5; font-size: 11px; }
+.feed-time { color:var(--dim); font-size:10px; margin-left:auto; }
+.feed-text { color: var(--muted); line-height: 1.5; font-size: 11px; display:flex; align-items:center; gap:6px; }
+.feed-src-icon {
+  width:14px; height:14px; flex-shrink:0; border-radius:3px;
+  object-fit:contain; image-rendering:-webkit-optimize-contrast;
+}
 
 /* HOW IT WORKS */
 .how-section { max-width:960px; margin:0 auto; padding:72px 48px 0; }
