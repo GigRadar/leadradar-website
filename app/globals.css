@@ -391,13 +391,13 @@ nav {
 /* PROGRESSIVE TABLE */
 .ptable { border: 1px solid var(--border); overflow: hidden; }
 .ptable-head {
-  display: grid; grid-template-columns: 2fr 1fr 1fr;
+  display: grid; grid-template-columns: 1.2fr 1fr 1fr;
   padding: 7px 12px; background: var(--bg2);
   font-size: 9px; letter-spacing: .12em; color: var(--muted);
   border-bottom: 1px solid var(--border);
 }
 .ptable-row {
-  display: grid; grid-template-columns: 2fr 1fr 1fr;
+  display: grid; grid-template-columns: 1.2fr 1fr 1fr;
   padding: 9px 12px; border-bottom: 1px solid var(--border);
   font-size: 12px; transition: background .15s;
 }
