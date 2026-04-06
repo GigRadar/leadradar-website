@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import LeadRadarLogo from './components/LeadRadarLogo'
+import SearchBar from './components/SearchBar'
 
 const PERSONAS = [
   { avatar: 'https://i.pravatar.cc/40?img=47', name: 'Sarah Chen',      title: 'VP of Sales',       company: 'Stripe',     logo: 'https://www.google.com/s2/favicons?domain=stripe.com&sz=32' },
@@ -137,10 +138,10 @@ export default function Home() {
           <strong>Clay, Apollo, HeyReach, Instantly.</strong>
           <span className="cursor">█</span>
         </p>
+        <SearchBar variant="hero" />
         <div className="hero-actions">
-          <a href="#waitlist" className="btn-cta">join waitlist →</a>
           <span className="hero-proof">
-            · <span>600+</span> operators · <span>8.2M</span> signals tracked
+            <span>600+</span> operators · <span>8.2M</span> signals tracked · or <a href="#waitlist" className="hero-waitlist-link">join waitlist →</a>
           </span>
         </div>
       </section>
