@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
 
 interface SearchBarProps {
   variant: 'hero' | 'chat'
@@ -16,7 +15,6 @@ const PLACEHOLDER = 'SaaS companies looking for sales automation tools...'
 export default function SearchBar({ variant, onSubmit, autoFocus, disabled, placeholder }: SearchBarProps) {
   const [value, setValue] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
-  const router = useRouter()
 
   useEffect(() => {
     if (autoFocus && inputRef.current) {
@@ -33,17 +31,10 @@ export default function SearchBar({ variant, onSubmit, autoFocus, disabled, plac
       onSubmit(q)
       setValue('')
     } else {
-      // Hero mode: morph the search bar into the /search input bar
-      // via the View Transitions API (with graceful fallback)
-      const target = '/search?q=' + encodeURIComponent(q)
-      const doc = document as Document & {
-        startViewTransition?: (cb: () => void) => unknown
-      }
-      if (typeof doc.startViewTransition === 'function') {
-        doc.startViewTransition(() => router.push(target))
-      } else {
-        router.push(target)
-      }
+      // Hero mode: hard-navigate so the cross-document View Transitions
+      // (@view-transition { navigation: auto }) can morph the shared
+      // search bar from hero position to the bottom input bar.
+      window.location.assign('/search?q=' + encodeURIComponent(q))
     }
   }
 

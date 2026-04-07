@@ -837,6 +837,13 @@ footer span { color:var(--accent); }
 }
 
 /* ─── VIEW TRANSITION (hero → search) ─── */
+/* Opt every same-origin browser navigation into the cross-document
+   View Transitions API. Combined with the matching view-transition-name
+   on .search-bar-hero and .search-input-bar .search-bar, the browser
+   morphs the search bar between its hero position and the bottom input
+   position automatically. */
+@view-transition { navigation: auto; }
+
 ::view-transition-old(hero-search-bar),
 ::view-transition-new(hero-search-bar) {
   animation-duration:.55s;
