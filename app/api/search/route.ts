@@ -42,32 +42,61 @@ const PEOPLE = [
   { name: 'Lisa Park', avatar: 'https://i.pravatar.cc/40?img=41', company: 'Outreach', companyLogo: 'https://www.google.com/s2/favicons?domain=outreach.io&sz=32' },
 ]
 
+// Query-aware templates: every line references {topic}, a phrase
+// extracted from the user's search query, so the generated signals
+// actually reflect what the user is looking for.
 const SIGNAL_TEMPLATES = [
-  { desc: 'r/sales "looking for alternatives to {tool}, pricing is getting out of hand"', verified: true },
-  { desc: 'Job post: "Build {role} automation pipeline" — ${budget} budget', verified: true },
-  { desc: '#saas-growth "anyone tried {tool}? need something for {need}"', verified: false },
-  { desc: 'Liked 3 posts from {tool} competitors this week', verified: false },
-  { desc: 'Job post: "Hiring {role} — must know {tool}" — ${budget}/yr', verified: true },
-  { desc: 'r/startups "we switched from {tool} and saved 60% on our pipeline"', verified: false },
-  { desc: 'Followed {competitor} CEO on LinkedIn + engaged with 4 posts', verified: false },
-  { desc: '"anyone have a {need} recommendation? current tool is failing us"', verified: true },
-  { desc: 'Subscribed to {competitor} newsletter + downloaded whitepaper', verified: false },
-  { desc: 'Job post: "Looking for {role} with {tool} experience"', verified: true },
-  { desc: 'r/entrepreneur "building a {need} stack, what signals matter most?"', verified: false },
-  { desc: 'Posted in #gtm-engineers: "need help with {need}"', verified: true },
-  { desc: 'Replied to {competitor} pricing thread on X/Twitter', verified: false },
-  { desc: 'Searched for "{tool} vs alternatives" — 3 comparison pages visited', verified: true },
-  { desc: 'r/sales "our {role} team is evaluating new {need} tools this quarter"', verified: true },
-  { desc: 'Mentioned budget reallocation for {need} in public Slack channel', verified: false },
-  { desc: 'Job post: "Seeking {role} to revamp outbound" — ${budget}', verified: true },
-  { desc: '"we need a better {need} solution — current one has too many gaps"', verified: true },
+  { desc: 'r/sales "looking for {topic} — current options are either bloated or expensive"', verified: true },
+  { desc: 'Job post: "Hiring for {topic}" — ${budget} budget', verified: true },
+  { desc: '#saas-growth "anyone here doing {topic} at scale? what tool stack?"', verified: false },
+  { desc: 'Liked 4 LinkedIn posts about {topic} this week', verified: false },
+  { desc: 'Job post: "Need help with {topic} — must move fast" — ${budget}/yr', verified: true },
+  { desc: 'r/startups "we switched providers for {topic} and cut costs 60%"', verified: false },
+  { desc: 'Followed 3 vendors in the {topic} space + engaged with their posts', verified: false },
+  { desc: '"any solid {topic} recommendation? our current setup is failing us"', verified: true },
+  { desc: 'Subscribed to two newsletters covering {topic} + downloaded a whitepaper', verified: false },
+  { desc: 'Job post: "Looking for someone with {topic} experience"', verified: true },
+  { desc: 'r/entrepreneur "building a stack around {topic}, what should I prioritize?"', verified: false },
+  { desc: 'Posted in #gtm-engineers: "need help shipping {topic} this quarter"', verified: true },
+  { desc: 'Replied to a pricing thread on X about {topic}', verified: false },
+  { desc: 'Searched "{topic} vs alternatives" — visited 4 comparison pages', verified: true },
+  { desc: 'r/sales "our team is evaluating {topic} tools this quarter"', verified: true },
+  { desc: 'Mentioned budget reallocation for {topic} in a public Slack channel', verified: false },
+  { desc: 'Job post: "Seeking lead to own {topic}" — ${budget}', verified: true },
+  { desc: '"we need a better {topic} solution — too many gaps in what we have"', verified: true },
+  { desc: 'Tweet: "what is everyone using for {topic} in 2026?" — 23 replies', verified: false },
+  { desc: 'Attended a webinar on {topic} last Thursday + asked 2 questions', verified: false },
+  { desc: '"anyone benchmarking {topic} vendors right now? would love to compare notes"', verified: true },
+  { desc: 'Bookmarked 5 articles tagged {topic} on Hacker News this week', verified: false },
 ]
 
-const TOOLS = ['Clay', 'Apollo', 'ZoomInfo', 'Outreach', 'Gong', 'Salesloft', 'HubSpot', 'Instantly', 'Lemlist']
-const ROLES = ['GTM Engineer', 'Sales Engineer', 'RevOps Manager', 'SDR Lead', 'Head of Growth', 'VP Sales']
-const NEEDS = ['lead enrichment', 'outbound automation', 'intent signals', 'sales intelligence', 'pipeline management', 'prospecting']
-const COMPETITORS = ['Clay', 'Apollo', 'ZoomInfo', 'Gong', 'Salesloft', 'Outreach']
 const BUDGETS = ['2,500', '4,800', '1,200', '8,000', '3,500', '6,200', '120,000', '95,000', '150,000']
+
+const STOPWORDS = new Set([
+  'a','an','the','and','or','but','of','for','to','in','on','at','by','from','with','about',
+  'as','is','are','was','were','be','been','being','have','has','had','do','does','did',
+  'this','that','these','those','my','our','your','their','i','we','you','they','them','it',
+  'who','what','which','where','when','why','how','that','than','then','so','if','can','will',
+  'me','us','any','all','some','more','most','other','new','best','top','need','looking','find',
+  'using','use','use','also','just','really','very',
+])
+
+function extractTopics(query: string): string[] {
+  const cleaned = query.toLowerCase().replace(/[^a-z0-9\s+#.&-]/g, ' ')
+  const words = cleaned.split(/\s+/).filter(w => w && !STOPWORDS.has(w) && w.length > 1)
+  if (words.length === 0) return [query.trim() || 'lead generation']
+
+  // Build a few phrases: full query (trimmed), 2-grams, then individual words
+  const phrases: string[] = []
+  const trimmed = query.trim().replace(/\s+/g, ' ')
+  if (trimmed.length <= 60) phrases.push(trimmed.toLowerCase())
+  for (let i = 0; i < words.length - 1; i++) {
+    phrases.push(`${words[i]} ${words[i + 1]}`)
+  }
+  phrases.push(...words)
+  // dedupe, keep order
+  return Array.from(new Set(phrases)).slice(0, 8)
+}
 
 function pick<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)]
@@ -88,12 +117,9 @@ function generateDate(i: number, total: number): string {
   }
 }
 
-function fillTemplate(template: string): string {
+function fillTemplate(template: string, topics: string[]): string {
   return template
-    .replace('{tool}', pick(TOOLS))
-    .replace('{role}', pick(ROLES))
-    .replace('{need}', pick(NEEDS))
-    .replace('{competitor}', pick(COMPETITORS))
+    .replace('{topic}', pick(topics))
     .replace('{budget}', pick(BUDGETS))
 }
 
@@ -101,6 +127,7 @@ function generateSignals(query: string): Signal[] {
   const count = 14 + Math.floor(Math.random() * 6) // 14-19 signals
   const used = new Set<number>()
   const signals: Signal[] = []
+  const topics = extractTopics(query)
 
   for (let i = 0; i < count; i++) {
     let personIdx: number
@@ -116,7 +143,7 @@ function generateSignals(query: string): Signal[] {
       id: `sig_${Date.now()}_${i}`,
       date: generateDate(i, count),
       source,
-      description: fillTemplate(template.desc),
+      description: fillTemplate(template.desc, topics),
       verified: template.verified,
       extraCount: Math.random() < 0.45 ? 1 + Math.floor(Math.random() * 3) : 0,
       person: { name: person.name, avatar: person.avatar },
