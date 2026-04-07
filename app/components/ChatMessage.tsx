@@ -86,8 +86,12 @@ function AIMessage({ steps, signals, totalOlder, onNewSearch }: Omit<AIMessagePr
               <span className="chat-results-count">{signals.length} signals found</span>
               <span className="chat-results-window">last 7 days</span>
             </div>
-            <SignalTable signals={signals} totalOlder={totalOlder} />
-            <ExportPanel onNewSearch={onNewSearch} signalCount={signals.length} />
+            <div className="chat-results-grid">
+              <div className="chat-results-table">
+                <SignalTable signals={signals} totalOlder={totalOlder} />
+              </div>
+              <ExportPanel onNewSearch={onNewSearch} signalCount={signals.length} />
+            </div>
           </div>
         )}
       </div>
