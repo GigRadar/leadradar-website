@@ -563,19 +563,39 @@ footer span { color:var(--accent); }
   background:var(--accent-dim); border-color:var(--accent);
   color:var(--fg); display:inline-block; max-width:600px;
   float:right;
+  border-radius:14px;
+  box-shadow:0 1px 0 rgba(255,255,255,.04), 0 6px 20px rgba(80,144,255,.12);
+  transform-origin:bottom right;
+  animation:userBubbleRise .55s cubic-bezier(.2,.85,.25,1) both;
 }
-.chat-msg-caret {
-  display:inline-block; margin-left:1px;
-  color:var(--accent); font-weight:400;
-  animation:caretBlink 1s steps(1) infinite;
+@keyframes userBubbleRise {
+  from {
+    opacity:0;
+    transform:translateY(28px) scale(.92);
+    box-shadow:0 1px 0 rgba(255,255,255,0), 0 0px 0 rgba(80,144,255,0);
+  }
+  to {
+    opacity:1;
+    transform:none;
+    box-shadow:0 1px 0 rgba(255,255,255,.04), 0 6px 20px rgba(80,144,255,.12);
+  }
 }
-.chat-msg-caret.is-done {
-  animation:caretBlink 1.2s steps(1) 4 forwards;
+
+/* Word-by-word reveal inside the user bubble — a soft, staggered
+   settle of already-typed text into place. */
+.chat-word {
+  display:inline-block;
   opacity:0;
+  transform:translateY(10px);
+  filter:blur(3px);
+  animation:wordSettle .5s cubic-bezier(.2,.85,.25,1) forwards;
 }
-@keyframes caretBlink {
-  0%, 49% { opacity:1; }
-  50%, 100% { opacity:0; }
+@keyframes wordSettle {
+  to {
+    opacity:1;
+    transform:none;
+    filter:blur(0);
+  }
 }
 .chat-msg-bubble-ai {
   background:var(--card); width:100%;

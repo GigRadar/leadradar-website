@@ -39,41 +39,28 @@ export default function ChatMessage(props: ChatMessageProps) {
 }
 
 function UserMessage({ text }: { text: string }) {
-  const [typed, setTyped] = useState('')
-  const [done, setDone] = useState(false)
-
-  useEffect(() => {
-    if (!text) return
-    setTyped('')
-    setDone(false)
-    // Time-based typewriter: each tick computes how many chars should
-    // be visible based on real elapsed time, so the animation stays
-    // accurate even when the browser throttles timers (e.g. hidden tab
-    // → setInterval pinned to ~1Hz). setInterval is used instead of
-    // requestAnimationFrame because rAF is fully suspended in hidden
-    // tabs, while setInterval still fires (slowly).
-    const duration = Math.min(900, Math.max(220, text.length * 28))
-    const start = Date.now()
-    const tick = () => {
-      const ratio = Math.min(1, (Date.now() - start) / duration)
-      const count = Math.floor(text.length * ratio)
-      setTyped(text.slice(0, count))
-      if (ratio >= 1) {
-        clearInterval(id)
-        setTyped(text)
-        setDone(true)
-      }
-    }
-    const id = setInterval(tick, 18)
-    return () => clearInterval(id)
-  }, [text])
-
+  // Split into words but preserve the spaces between them so the bubble
+  // wraps naturally. Each word animates in with a small stagger so the
+  // sentence settles into place gracefully — no typewriter, just a soft
+  // reveal of text the user already typed.
+  const words = text.split(/(\s+)/)
   return (
     <div className="chat-msg chat-msg-user">
       <div className="chat-msg-label">// your query</div>
       <div className="chat-msg-bubble chat-msg-bubble-user">
-        {typed}
-        <span className={`chat-msg-caret${done ? ' is-done' : ''}`}>▍</span>
+        {words.map((w, i) =>
+          /^\s+$/.test(w) ? (
+            <span key={i}>{w}</span>
+          ) : (
+            <span
+              key={i}
+              className="chat-word"
+              style={{ animationDelay: `${i * 35}ms` }}
+            >
+              {w}
+            </span>
+          )
+        )}
       </div>
     </div>
   )
