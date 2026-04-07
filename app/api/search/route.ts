@@ -6,6 +6,7 @@ interface Signal {
   source: { name: string; logo: string | null; anonymous: boolean }
   description: string
   verified: boolean
+  extraCount: number
   person: { name: string; avatar: string }
   company: { name: string; logo: string }
 }
@@ -117,6 +118,7 @@ function generateSignals(query: string): Signal[] {
       source,
       description: fillTemplate(template.desc),
       verified: template.verified,
+      extraCount: Math.random() < 0.45 ? 1 + Math.floor(Math.random() * 3) : 0,
       person: { name: person.name, avatar: person.avatar },
       company: { name: person.company, logo: person.companyLogo },
     })

@@ -12,6 +12,7 @@ interface Signal {
   source: { name: string; logo: string | null; anonymous: boolean }
   description: string
   verified: boolean
+  extraCount: number
   person: { name: string; avatar: string }
   company: { name: string; logo: string }
 }
