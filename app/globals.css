@@ -498,6 +498,7 @@ footer span { color:var(--accent); }
 /* Hero variant */
 .search-bar-hero {
   max-width:620px; margin:0 auto 16px;
+  view-transition-name:hero-search-bar;
 }
 .hero-waitlist-link { color:var(--accent); text-decoration:none; }
 .hero-waitlist-link:hover { text-decoration:underline; }
@@ -527,7 +528,10 @@ footer span { color:var(--accent); }
   border-top:1px solid var(--border); background:var(--bg);
   padding-top:12px;
 }
-.search-input-bar .search-bar { max-width:100%; }
+.search-input-bar .search-bar {
+  max-width:100%;
+  view-transition-name:hero-search-bar;
+}
 .search-input-hint {
   font-size:10px; color:var(--dim); margin-top:6px;
   letter-spacing:.05em;
@@ -826,7 +830,23 @@ footer span { color:var(--accent); }
 
 .search-page { animation:fadeIn .35s ease-out both; }
 .search-nav { animation:fadeSlideUp .4s ease-out both; }
-.search-input-bar { animation:inputBarRise .45s cubic-bezier(.2,.9,.3,1) both; }
+/* When the View Transitions API is morphing the search bar in,
+   skip the redundant input-bar rise animation */
+@supports not (view-transition-name: none) {
+  .search-input-bar { animation:inputBarRise .45s cubic-bezier(.2,.9,.3,1) both; }
+}
+
+/* ─── VIEW TRANSITION (hero → search) ─── */
+::view-transition-old(hero-search-bar),
+::view-transition-new(hero-search-bar) {
+  animation-duration:.55s;
+  animation-timing-function:cubic-bezier(.2,.9,.3,1);
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration:.4s;
+  animation-timing-function:ease-out;
+}
 .chat-msg { animation:fadeSlideUp .4s cubic-bezier(.2,.9,.3,1) both; }
 .chat-step { animation:fadeSlideLeft .3s ease-out both; }
 .chat-step-loading { animation:fadeIn .2s ease-out both; }

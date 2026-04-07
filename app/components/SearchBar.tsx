@@ -33,8 +33,17 @@ export default function SearchBar({ variant, onSubmit, autoFocus, disabled, plac
       onSubmit(q)
       setValue('')
     } else {
-      // Hero mode: navigate to search page
-      router.push('/search?q=' + encodeURIComponent(q))
+      // Hero mode: morph the search bar into the /search input bar
+      // via the View Transitions API (with graceful fallback)
+      const target = '/search?q=' + encodeURIComponent(q)
+      const doc = document as Document & {
+        startViewTransition?: (cb: () => void) => unknown
+      }
+      if (typeof doc.startViewTransition === 'function') {
+        doc.startViewTransition(() => router.push(target))
+      } else {
+        router.push(target)
+      }
     }
   }
 
