@@ -32,17 +32,51 @@ type ChatMessageProps = UserMessageProps | AIMessageProps
 
 export default function ChatMessage(props: ChatMessageProps) {
   if (props.type === 'user') {
-    return (
-      <div className="chat-msg chat-msg-user">
-        <div className="chat-msg-label">// your query</div>
-        <div className="chat-msg-bubble chat-msg-bubble-user">
-          {props.text}
-        </div>
-      </div>
-    )
+    return <UserMessage text={props.text} />
   }
 
   return <AIMessage {...props} />
+}
+
+function UserMessage({ text }: { text: string }) {
+  const [typed, setTyped] = useState('')
+  const [done, setDone] = useState(false)
+
+  useEffect(() => {
+    if (!text) return
+    setTyped('')
+    setDone(false)
+    // Time-based typewriter: each tick computes how many chars should
+    // be visible based on real elapsed time, so the animation stays
+    // accurate even when the browser throttles timers (e.g. hidden tab
+    // → setInterval pinned to ~1Hz). setInterval is used instead of
+    // requestAnimationFrame because rAF is fully suspended in hidden
+    // tabs, while setInterval still fires (slowly).
+    const duration = Math.min(900, Math.max(220, text.length * 28))
+    const start = Date.now()
+    const tick = () => {
+      const ratio = Math.min(1, (Date.now() - start) / duration)
+      const count = Math.floor(text.length * ratio)
+      setTyped(text.slice(0, count))
+      if (ratio >= 1) {
+        clearInterval(id)
+        setTyped(text)
+        setDone(true)
+      }
+    }
+    const id = setInterval(tick, 18)
+    return () => clearInterval(id)
+  }, [text])
+
+  return (
+    <div className="chat-msg chat-msg-user">
+      <div className="chat-msg-label">// your query</div>
+      <div className="chat-msg-bubble chat-msg-bubble-user">
+        {typed}
+        <span className={`chat-msg-caret${done ? ' is-done' : ''}`}>▍</span>
+      </div>
+    </div>
+  )
 }
 
 function AIMessage({ steps, signals, totalOlder, onNewSearch }: Omit<AIMessageProps, 'type'>) {
