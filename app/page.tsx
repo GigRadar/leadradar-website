@@ -129,8 +129,10 @@ export default function Home() {
           // <span>v0.1 — early access open</span> · crowd-sourced · open marketplace
         </div>
         <h1 className="hero-headline">
-          The signal layer your<br />
-          <em>GTM stack is missing.</em>
+          Verifiable real-time crowd-sourced signals<br />
+          delivered straight into your GTM stack<br />
+          for <em>almost</em> free<br />
+          <span className="hero-headline-note">(Pay as you go, start from 1 row)</span>
         </h1>
         <p className="hero-sub">
           Crowd-sourced intent signals from <strong>Telegram, Upwork, Reddit</strong> and 50+ sources —
